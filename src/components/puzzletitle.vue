@@ -3,11 +3,15 @@
     <b-alert show variant="info">
       <h4>Tntt word scrambler</h4>
       <div>Instructions:</div>
-      <ul style="list-style: none">
-        <li>- Solve the scrambled word before the timer runs out.</li>
-        <li>- A correct answer will give you a random key phrase, there are 6 in total.</li>
-        <li>- Organize phrases into the correct and show Huynh Truong</li>
-      </ul>
+      <b-container>
+        <b-row>
+          <b-col id="instruction-details">
+            <p>Solve the scrambled word before the timer runs out.</p>
+            <p>A correct answer will give you a random key phrase, there are 6 in total.</p>
+            <p>Organize phrases into the correct and show Huynh Truong.</p>
+          </b-col>
+        </b-row>
+      </b-container>            
     </b-alert>
   </div>
 </template>
@@ -19,8 +23,12 @@ export default {
 </script>
 
 <style scoped>
-li {
-  font-size: 15px;
+#instruction-details{
+  font-size: 12px;
   font-weight: bold;
+}
+p{
+  margin: 0;
+  padding: 0;
 }
 </style>
