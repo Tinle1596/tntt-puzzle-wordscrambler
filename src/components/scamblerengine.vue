@@ -60,7 +60,7 @@ export default {
     return {
       // Timer section
       timer: null,
-      totalTime: 0.5 * 60,
+      totalTime: 1.00 * 60,
       // Word section
       currentWord: "",
       isStarted: false,
@@ -102,7 +102,7 @@ export default {
       return (time < 10 ? "0" : "") + time;
     },
     reset: function() {
-      this.totalTime = 0.5 * 60;
+      this.totalTime = 1.00 * 60;
       clearInterval(this.timer);
       this.timer = null;
       this.input = "";
@@ -162,7 +162,7 @@ export default {
   line-height: 1;
 }
 #scrambled-word {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: bold;
   line-height: 1;
 }
