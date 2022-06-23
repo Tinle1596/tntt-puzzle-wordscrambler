@@ -1,10 +1,10 @@
 var phraseArray = [
-    'you must convince',
-    'at least 1 of',
-    'the shepherds',
-    'to join you',
-    'to go see Mary,', 
-    'Joseph and Jesus'
+    'Elizabeth has also',
+    'convceived a son',
+    'in her old age',
+    'for nothing will',
+    'be impossible', 
+    'for God'
 ]
 
 export{phraseArray}

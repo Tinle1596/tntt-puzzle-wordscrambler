@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container>   
       <b-row>
         <b-col>
           <div id="timer">
@@ -8,6 +8,13 @@
               <span id="minutes">{{ minutes }}</span>
               <span id="middle">:</span>
               <span id="seconds">{{ seconds }}</span>
+            </b-alert>
+          </div>
+        </b-col>
+        <b-col>
+          <div id="phrase-count">
+            <b-alert show variant="info">
+              <span>Phrases left: {{phraseArray.length}}</span>
             </b-alert>
           </div>
         </b-col>
@@ -39,10 +46,8 @@
         <b-form-input id="input-1" v-model="input" required placeholder="answer"/>
       </div>
       <div>
-        <b-group>
           <b-button v-if="!isStarted" @click="startPuzzle">Start</b-button>
           <b-button v-if="isStarted" @click="checkAnswer" @keydown.enter="checkAnswer">Submit</b-button>
-        </b-group>
         <b-button v-if="isCorrect === true" @click="reset">Reset</b-button>
       </div>
     </div>
@@ -69,19 +74,22 @@ export default {
       input: "",
       isCorrect: null,
       dictionary: dictionary,
-      phraseArray: phraseArray
+      phraseArray: phraseArray,      
     };
+  },  
+  created(){
+    this.getNextPhrase();
   },
   methods: {
     startPuzzle: function() {
       this.isStarted = true;
-      this.resetCurrentPhrase();
+      //this.getNextPhrase();
       this.resetCurrentWord();
       this.startTime();
     },
     startTime: function() {
       this.resetCurrentWord();
-      this.resetCurrentPhrase();
+      this.getNextPhrase();
       this.timer = setInterval(() => {
         this.countdown();
       }, 1000);
@@ -110,9 +118,9 @@ export default {
       this.isCorrect = null;
       this.startTime();
     },
-    resetCurrentPhrase: function() {
-      var randomIndex = Math.floor(Math.random() * this.phraseArray.length);
-      this.currentPhrase = this.phraseArray[randomIndex];
+    getNextPhrase: function() {
+      let randomIndex = Math.floor(Math.random() * this.phraseArray.length);
+      this.currentPhrase = this.phraseArray[randomIndex];      
     },
     resetCurrentWord: function() {
       var randomIndex = Math.floor(Math.random() * this.dictionary.length);
@@ -122,14 +130,17 @@ export default {
       if (this.input.toLowerCase() === this.currentWord) {
         this.stopTimer();
         this.isCorrect = true;
+        this.removePhrase();
       } else {
         this.input = null;
         this.isCorrect = false;
       }
+    },
+    removePhrase: function(){
+      let array = this.phraseArray
+      let index = this.phraseArray.indexOf(this.currentPhrase)      
+      this.phraseArray.splice(index, 1)
     }
-  },
-  created() {
-    //this.startTime();
   },
   computed: {
     minutes: function() {
@@ -155,6 +166,10 @@ export default {
 <style scoped>
 #timer {
   font-size: 50px;
+  line-height: 1;
+}
+#phrase-count {
+  font-size: 25px;
   line-height: 1;
 }
 #phrase-container {
